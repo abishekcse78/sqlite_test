@@ -10,7 +10,11 @@ class StudentsPage extends StatefulWidget {
 }
 
 class _StudentsPageState extends State<StudentsPage> {
-  final _addUserFormKey = GlobalKey<FormState>();
+  final _addStudentFormKey = GlobalKey<FormState>();
+
+  late final String name;
+  late final String id;
+  late final String age;
 
   @override
   Widget build(BuildContext context) {
@@ -20,20 +24,38 @@ class _StudentsPageState extends State<StudentsPage> {
         centerTitle: true,
       ),
       body: Form(
-        key: _addUserFormKey,
+        key: _addStudentFormKey,
         child: SingleChildScrollView(
           child: Column(
             children: [
               const LabelText(label: 'Student name'),
               TextFormField(
                 autofocus: true,
+                onSaved: (value) {
+                  name = value!;
+                },
               ),
               const LabelText(label: 'Student id'),
-              TextFormField(),
+              TextFormField(
+                onSaved: (value) {
+                  id = value!;
+                },
+              ),
               const LabelText(label: 'Student Age'),
-              TextFormField(),
+              TextFormField(
+                onSaved: (value) {
+                  age = value!;
+                },
+              ),
               ElevatedButton(
                 onPressed: () {
+                  bool formValid = _addStudentFormKey.currentState!.validate();
+
+                  if (formValid) {
+                    _addStudentFormKey.currentState!.save();
+                    _addStudentFormKey.currentState!.reset();
+                  }
+
                   Navigator.push(
                     context,
                     MaterialPageRoute(
