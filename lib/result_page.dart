@@ -2,15 +2,12 @@ import 'package:flutter/material.dart';
 
 class ResultPage extends StatelessWidget {
   const ResultPage(
-      {Key? key,
-      required this.studentName,
-      required this.studentAge,
-      required this.studentID})
+      {Key? key, this.studentName, this.studentAge, this.studentID})
       : super(key: key);
 
-  final String studentName;
-  final int studentAge;
-  final int studentID;
+  final String? studentName;
+  final int? studentAge;
+  final int? studentID;
 
   @override
   Widget build(BuildContext context) {

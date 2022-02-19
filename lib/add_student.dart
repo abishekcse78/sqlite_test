@@ -37,11 +37,7 @@ class _StudentsPageState extends State<StudentsPage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const ResultPage(
-                        studentID: null,
-                        studentName: '',
-                        studentAge: null,
-                      ),
+                      builder: (context) => const ResultPage(),
                     ),
                   );
                 },
