@@ -67,7 +67,7 @@ class StudentDatabase {
     );
   }
 
-  ///Insert the Data into a Table
+  ///Delete a Data from a Table
   Future<Future<int>> delete(Students students) async {
     final db = await instance.database;
     return db.delete(
