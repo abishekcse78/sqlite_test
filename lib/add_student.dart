@@ -32,9 +32,7 @@ class _StudentsPageState extends State<StudentsPage> {
               const LabelText(label: 'Student Age'),
               TextFormField(),
               ElevatedButton(
-                onPressed: () {
-
-                },
+                onPressed: () {},
                 child: const Text('Store Data'),
               )
             ],
