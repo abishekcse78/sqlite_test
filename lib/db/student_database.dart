@@ -40,6 +40,45 @@ class StudentDatabase {
     return students.copy(id: id);
   }
 
+  ///Read the Data from a Table
+  Future<List> readData(Students students) async {
+    final db = await instance.database;
+
+    final List<Map<String, dynamic>> maps = await db.query('students');
+
+    return List.generate(maps.length, (i) {
+      return Students(
+        id: maps[i]['id'],
+        name: maps[i]['name'],
+        age: maps[i]['age'],
+      );
+    });
+  }
+
+  ///Update the Data into a Table
+  Future<Future<int>> update(Students students) async {
+    final db = await instance.database;
+
+    return db.update(
+      'students',
+      students.toMap(),
+      where: 'id = ?',
+      whereArgs: [students.id],
+    );
+  }
+
+  ///Insert the Data into a Table
+  Future<Future<int>> delete(Students students) async {
+    final db = await instance.database;
+    return db.delete(
+      'dogs',
+      // Use a `where` clause to delete a specific dog.
+      where: 'id = ?',
+      // Pass the Dog's id as a whereArg to prevent SQL injection.
+      whereArgs: [students.id],
+    );
+  }
+
   ///Close the DataBase
   Future close() async {
     final db = await instance.database;
