@@ -44,7 +44,7 @@ class StudentDatabase {
   Future<List> readData(Students students) async {
     final db = await instance.database;
 
-    final List<Map<String, dynamic>> maps = await db.query('students');
+    final List<Map<String, dynamic>> maps = await db.query(tableName);
 
     return List.generate(maps.length, (i) {
       return Students(
@@ -60,7 +60,7 @@ class StudentDatabase {
     final db = await instance.database;
 
     return db.update(
-      'students',
+      tableName,
       students.toMap(),
       where: 'id = ?',
       whereArgs: [students.id],
@@ -71,10 +71,8 @@ class StudentDatabase {
   Future<Future<int>> delete(Students students) async {
     final db = await instance.database;
     return db.delete(
-      'dogs',
-      // Use a `where` clause to delete a specific dog.
+      tableName,
       where: 'id = ?',
-      // Pass the Dog's id as a whereArg to prevent SQL injection.
       whereArgs: [students.id],
     );
   }
