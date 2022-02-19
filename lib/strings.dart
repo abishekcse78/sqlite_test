@@ -1,3 +1,5 @@
+import 'dart:core';
+
 const String tableName = 'student';
 const String kTextId = 'id';
 const String kIdType = 'INTEGER PRIMARY KEY AUTOINCREMENT';
