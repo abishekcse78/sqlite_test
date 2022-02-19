@@ -3,6 +3,16 @@ import 'package:sqlite_test/data_model.dart';
 import 'package:sqlite_test/strings.dart';
 
 class StudentDatabase {
+  static final StudentDatabase _databaseSingleton = StudentDatabase._internal();
+
+  factory StudentDatabase() {
+    return _databaseSingleton;
+  }
+
+  StudentDatabase._internal();
+
+  final _fireDB = StudentDatabase.instance;
+
   /// Initialize DataBase
   static final StudentDatabase instance = StudentDatabase._init();
   static Database? _database;
@@ -33,15 +43,16 @@ class StudentDatabase {
   }
 
   ///Insert the Data into a Table
-  Future<Students> create(Students students) async {
+  Future<Students> create(Students student) async {
     final db = await instance.database;
 
-    final id = await db.insert(tableName, students.toMap());
-    return students.copy(id: id);
+    final id = await db.insert(tableName, student.toMap());
+    var stud = student.copy(id: id);
+    return stud;
   }
 
   ///Read the Data from a Table
-  Future<List> readData(Students students) async {
+  Future<List> readData(Students student) async {
     final db = await instance.database;
 
     final List<Map<String, dynamic>> maps = await db.query(tableName);
@@ -56,24 +67,24 @@ class StudentDatabase {
   }
 
   ///Update the Data into a Table
-  Future<Future<int>> update(Students students) async {
+  Future<Future<int>> update(Students student) async {
     final db = await instance.database;
 
     return db.update(
       tableName,
-      students.toMap(),
+      student.toMap(),
       where: 'id = ?',
-      whereArgs: [students.id],
+      whereArgs: [student.id],
     );
   }
 
   ///Delete a Data from a Table
-  Future<Future<int>> delete(Students students) async {
+  Future<Future<int>> delete(Students student) async {
     final db = await instance.database;
     return db.delete(
       tableName,
       where: 'id = ?',
-      whereArgs: [students.id],
+      whereArgs: [student.id],
     );
   }
 

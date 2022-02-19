@@ -2,8 +2,8 @@ import 'package:sqlite_test/strings.dart';
 
 class Students {
   final String name;
-  final int id;
-  final int age;
+  final String id;
+  final String age;
 
   const Students({
     required this.name,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sqlite_test/label_text.dart';
 import 'package:sqlite_test/result_page.dart';
+import 'package:sqlite_test/student_service.dart';
 
 class StudentsPage extends StatefulWidget {
   const StudentsPage({Key? key}) : super(key: key);
@@ -48,12 +49,18 @@ class _StudentsPageState extends State<StudentsPage> {
                 },
               ),
               ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
                   bool formValid = _addStudentFormKey.currentState!.validate();
 
                   if (formValid) {
                     _addStudentFormKey.currentState!.save();
                     _addStudentFormKey.currentState!.reset();
+
+                    bool _userAdded = await StudentService().addUser(
+                      id: id,
+                      age: age,
+                      name: name,
+                    );
                   }
 
                   Navigator.push(
