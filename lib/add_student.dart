@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sqlite_test/label_text.dart';
+import 'package:sqlite_test/result_page.dart';
 
 class StudentsPage extends StatefulWidget {
   const StudentsPage({Key? key}) : super(key: key);
@@ -32,7 +33,18 @@ class _StudentsPageState extends State<StudentsPage> {
               const LabelText(label: 'Student Age'),
               TextFormField(),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const ResultPage(
+                        studentID: null,
+                        studentName: '',
+                        studentAge: null,
+                      ),
+                    ),
+                  );
+                },
                 child: const Text('Store Data'),
               )
             ],
